@@ -24,7 +24,6 @@
 #include "secril-client.h"
 #include <hardware_legacy/power.h> // For wakelock
 
-
 #define RIL_CLIENT_WAKE_LOCK "client-interface"
 
 namespace android {
@@ -1405,6 +1404,24 @@ static int blockingWrite(int fd, const void *buffer, size_t len) {
 }
 
 } // namespace android
+
+/**
+ * RIL compatibility stuffs.
+ */
+
+#if defined(TOROPLUS_RADIO)
+/**
+ * toroplus's RIL has the ability to take a screenshot. Really?
+ * Supposedly some vendor/testing/factory stuff. This
+ * codepath should never be hit under any legitimate circumstances.
+ * Just define the symbol.
+ */
+extern "C"
+void _ZN7android16ScreenshotClient6updateEv()
+{
+	ALOGE("%s: CALLED! SHOULD NOT HAPPEN!!", __func__);
+}
+#endif
 
 // end of file
 

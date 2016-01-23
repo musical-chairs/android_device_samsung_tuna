@@ -16,4 +16,8 @@ LOCAL_SHARED_LIBRARIES := \
 
 LOCAL_MODULE:= libsecril-client
 
+ifeq ($(TARGET_TOROPLUS_RADIO), true)
+	LOCAL_CFLAGS += -DTOROPLUS_RADIO
+endif
+
 include $(BUILD_SHARED_LIBRARY)

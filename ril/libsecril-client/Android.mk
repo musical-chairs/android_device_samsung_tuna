@@ -6,7 +6,8 @@ include $(CLEAR_VARS)
 LOCAL_MODULE_TAGS := optional
 
 LOCAL_SRC_FILES:= \
-    secril-client.cpp
+    secril-client.cpp \
+    secril-compat.cpp
 
 LOCAL_SHARED_LIBRARIES := \
     libutils \
@@ -15,5 +16,9 @@ LOCAL_SHARED_LIBRARIES := \
     libhardware_legacy
 
 LOCAL_MODULE:= libsecril-client
+
+ifeq ($(TARGET_TOROPLUS_RADIO), true)
+    LOCAL_CFLAGS += -DTOROPLUS_RADIO
+endif
 
 include $(BUILD_SHARED_LIBRARY)
